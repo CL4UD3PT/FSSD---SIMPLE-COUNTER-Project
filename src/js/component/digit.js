@@ -2,8 +2,6 @@ import React from "react";
 
 export const Digit = (props) => {
     return (
-        <div className="">
-            <div className="p-3 mb-3 text-bg-dark rounded-3">{props.text}</div>
-        </div>
+        <h1 className="px-3 py-4 m-1 text-bg-dark rounded-3">{props.text}</h1>
     );
 };
