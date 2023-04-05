@@ -1,3 +1,9 @@
+<!--hide-->
+# Simple Counter with React
+<!--endhide-->
+
+
+
 # Hello World with React boilerplate
 
 Start coding a react application
