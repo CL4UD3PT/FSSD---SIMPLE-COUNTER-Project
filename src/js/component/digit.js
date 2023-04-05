@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Digit = (content) => {
+export const Digit = (props) => {
     return (
-        <>
-            <span>{content}</span>
-        </>
+        <div className="">
+            <div className="p-3 mb-3 text-bg-dark rounded-3">{props.text}</div>
+        </div>
     );
 };
