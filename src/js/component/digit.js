@@ -1,6 +1,6 @@
 import React from "react";
 
-const Digit = (content) => {
+export const Digit = (content) => {
     return (
         <>
             <span>{content}</span>
