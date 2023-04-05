@@ -4,8 +4,12 @@ import { Digit } from "./digit"
 //create your first component
 const Home = () => {
 	return (
-		<div className="text-center">
-			<Digit text="test"/>
+		<div className="d-flex text-center">
+			<Digit text="0"/>
+			<Digit text="0"/>
+			<Digit text="0"/>
+			<Digit text="0"/>
+			<Digit text="0"/>
 		</div>
 	);
 };
