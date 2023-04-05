@@ -11,6 +11,8 @@ const Home = () => {
         <Digit text="0" />
         <Digit text="0" />
         <Digit text="0" />
+        <Digit text="0" />
+        <Digit text="0" />
       </div>
     </div>
   );
