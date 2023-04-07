@@ -4,8 +4,9 @@ export const Counter = (props) => {
 
     const digits = [];
     for (let i = 0; i < props.numberOfDigits; i++){
-        if(i == 0) digits.unshift('1');
-        else digits.unshift(digits[i-1]+0);
+        if(i == 0) digits.push('1');
+        else digits.unshift(digits[0]+0);
+        console.log(digits)
     }
 
     return (
