@@ -54,11 +54,11 @@ const Home = () => {
       <hr></hr>
       <div className="row my-3">
         <div className="cor-6 d-flex justify-content-center">
-          <input type="radio" className="btn-check" onClick={()=>{setCountdown(false)}} name="options-outlined" id="success-outlined" autocomplete="off" disabled={start} checked={!countdown}/>
-          <label className="btn btn-outline-success m-3" htmlFor="success-outlined">Timer</label>
+          <input type="radio" className="btn-check" onClick={()=>{setCountdown(false)}} name="options-outlined" id="info-outlined" autocomplete="off" disabled={start} checked={!countdown}/>
+          <label className="btn btn-outline-info m-3" htmlFor="info-outlined">Timer</label>
 
-          <input type="radio" className="btn-check" onClick={()=>{setCountdown(true)}} name="options-outlined" id="danger-outlined" autocomplete="off" disabled={start} checked={countdown} />
-          <label className="btn btn-outline-danger m-3" htmlFor="danger-outlined">Countdown</label>
+          <input type="radio" className="btn-check" onClick={()=>{setCountdown(true)}} name="options-outlined" id="warning-outlined" autocomplete="off" disabled={start} checked={countdown} />
+          <label className="btn btn-outline-warning m-3" htmlFor="warning-outlined">Countdown</label>
         </div>
       </div>
       <div className="row my-3">
