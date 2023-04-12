@@ -27,8 +27,6 @@ const Home = () => {
   });
 
   const handleInitialCounter = (startCounterValue) => {
-    setStart(false);
-    setCountdown(true);
     setTimer(startCounterValue);
   };
 
@@ -54,30 +52,32 @@ const Home = () => {
 
       {/* COUNTER - COUNTDOWN */}
       <hr></hr>
-      <div className="row mt-3">
+      <div className="row my-3">
         <div className="cor-6 d-flex justify-content-center">
-          <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" />
+          <input type="radio" className="btn-check m-3" onClick={()=>{setCountdown(false)}} name="options-outlined" id="success-outlined" autocomplete="off" checked={!countdown}/>
           <label className="btn btn-outline-success" htmlFor="success-outlined">Timer</label>
 
-          <input type="radio" className="btn-check m-3" name="options-outlined" id="danger-outlined" autocomplete="off" />
+          <input type="radio" className="btn-check m-3" onClick={()=>{setCountdown(true)}} name="options-outlined" id="danger-outlined" autocomplete="off" checked={countdown} />
           <label className="btn btn-outline-danger" htmlFor="danger-outlined">Countdown</label>
         </div>
       </div>
-      <div className="row mb-3">
-        <label htmlFor="numberToStartCounter" className="form-label">
-          Enter a Number to start Countdown:
-        </label>
+      <div className="row my-3">
+        <div className="col-6 d-flex flex-column mx-auto align-items-center">
+          <label htmlFor="numberToStartCounter" className="form-label">
+            Enter a Number to start Timer/Countdown:
+          </label>
 
-        <input
-          type="number"
-          className="form-control"
-          id="numberToStartCounter"
-          onKeyUp={(e) => {
-            if (e.key === "Enter") {
-              handleInitialCounter(Number(e.target.value));
-            }
-          }}
-        />
+          <input
+            type="number"
+            className="form-control"
+            id="numberToStartCounter"
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                handleInitialCounter(Number(e.target.value));
+              }
+            }}
+          />
+        </div>
       </div>
     </div>
   );
