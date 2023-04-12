@@ -54,7 +54,7 @@ const Home = () => {
         />
       </div>
       <div>
-        <button className={`btn ${start?"btn-success":"btn-warning text-white"} fs-2`} onClick={()=>setStart(!start)}>{ start ? <i className="fa-regular fa-circle-pause"></i> : <i class="fa-regular fa-circle-play"></i> }</button>
+        <button className={`btn ${start?"btn-success":"btn-warning text-white"} fs-2`} onClick={()=>setStart(!start)}>{ start ? <i className="fa-solid fa-pause fa-bounce"></i> : <i class="fa-solid fa-play fa-fade"></i> }</button>
       </div>
     </div>
   );
