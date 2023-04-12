@@ -11,7 +11,7 @@ export const Counter = (props) => {
 
     return (
         <>
-            <h1 className="col px-3 py-4 m-1 text-bg-dark bg-dark bg-gradient rounded-3"><i className="fa-regular fa-clock"></i></h1>
+            <h1 className="col px-3 py-4 m-1 text-bg-dark bg-dark bg-gradient rounded-3"><i className={`fa-solid ${props.modeCountdown ? "fa-hourglass-start" : "fa-stopwatch"}`}></i></h1>
             {digits.map((digit, i) => <h1 key={i} className="col px-3 py-4 m-1 text-bg-dark bg-dark bg-gradient rounded-3">{Math.floor(props.time / Number(digit)) % 10}</h1>)}
         </>
     );
