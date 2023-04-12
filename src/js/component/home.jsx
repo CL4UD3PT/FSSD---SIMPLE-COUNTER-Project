@@ -6,19 +6,26 @@ import { Counter } from "./counter";
 const Home = () => {
   const [timer, setTimer] = useState(0);
   const [countdown, setCountdown] = useState(false);
+  const [start, setStart] = useState(false);
 
-  useEffect(()=>{
-    if(countdown && timer === 0) setCountdown(false);
-    
-    const intervalFunc = () => {
-      if(!countdown) {setTimer(timer => timer + 1)};
-      if(countdown && timer > 0) {setTimer(timer => timer - 1)};
+  useEffect(() => {
+    if (start) {
+      if (countdown && timer === 0) setCountdown(false);
+
+      const intervalFunc = () => {
+        if (!countdown) {
+          setTimer((timer) => timer + 1);
+        }
+        if (countdown && timer > 0) {
+          setTimer((timer) => timer - 1);
+        }
+      };
+
+      const interval = setInterval(intervalFunc, 1000);
+      return () => clearInterval(interval);
     }
+  }, [start]);
 
-    const interval = setInterval(intervalFunc, 1000);
-    return ()=> clearInterval(interval);
-  });
-  
   const handleInitialCounter = (startCounterValue) => {
     setCountdown(true);
     setTimer(startCounterValue);
@@ -45,6 +52,9 @@ const Home = () => {
             }
           }}
         />
+      </div>
+      <div>
+        <button className={`btn ${start?"btn-success":"btn-warning text-white"} fs-2`} onClick={()=>setStart(!start)}>{ start ? <i className="fa-regular fa-circle-pause"></i> : <i class="fa-regular fa-circle-play"></i> }</button>
       </div>
     </div>
   );
