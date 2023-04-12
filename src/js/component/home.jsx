@@ -37,7 +37,7 @@ const Home = () => {
         <Counter time={timer} numberOfDigits={6} />
       </div>
 
-      <div className="mb-3">
+      <div className="row mb-3">
         <label htmlFor="numberToStartCounter" className="form-label">
           Enter a Number to start Countdown:
         </label>
@@ -53,8 +53,11 @@ const Home = () => {
           }}
         />
       </div>
-      <div>
-        <button className={`btn ${start?"btn-success":"btn-warning text-white"} fs-2`} onClick={()=>setStart(!start)}>{ start ? <i className="fa-solid fa-pause fa-bounce"></i> : <i class="fa-solid fa-play fa-fade"></i> }</button>
+      <div className="row mb-3">
+        <div className="col-6 d-flex justify-content-center">
+          <button className={`btn ${start?"btn-success":"btn-primary"} fs-2`} onClick={()=>setStart(!start)}>{ start ? <i className="fa-solid fa-pause fa-bounce"></i> : <i class="fa-solid fa-play fa-fade"></i> }</button>
+          {start ? <button className="btn btn-danger fs-2"><i class="fa-solid fa-stop"></i></button> : ""}
+        </div>
       </div>
     </div>
   );
