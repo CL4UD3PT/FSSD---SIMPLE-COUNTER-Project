@@ -1,19 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Counter } from "./counter";
+
 
 const Home = () => {
   const [timer, setTimer] = useState(0);
   const [countdown, setCountdown] = useState(false);
-  const [start, setStart] = useState(true);
-  const [startCounterValue, setStartCounterValue] = useState('');
+  const [isRunning, setIsRunning] = useState(true);
+  const [startTimerValue, setStartTimerValue] = useState('');
+  const [reachedZero, setReachedZero] = useState(false);
 
   // refresh counter
   useEffect(() => {
-    if (start) {
+    if (isRunning) {
+      // when countdown reaches 0
       if (countdown && timer === 0){
-        handleStop();
+        setReachedZero(true);
+        setIsRunning(false);
       }
 
+      // increment/decrement timer
       const intervalFunc = () => {
         if (!countdown) {
           setTimer((timer) => timer + 1);
@@ -28,10 +33,12 @@ const Home = () => {
     }
   });
 
-  const handleStop = () => {
-    setStart(false);
+  const reset = () => {
     setTimer(0);
-    setStartCounterValue('');
+    setCountdown(false);
+    setIsRunning(false);
+    setStartTimerValue('');
+    setReachedZero(false)
   }
 
   return (
@@ -43,9 +50,10 @@ const Home = () => {
       {/* PLAY/RESUME - STOP */}
       <hr></hr>
       <div className="row my-2 justify-content-center">
-        <div className="col-6 d-flex justify-content-center">
-          { <i className={`fa-solid w-10 fs-2 m-3 cursor-pointer ${start ? "fa-pause fa-bounce text-success" : "fa-play fa-fade text-primary"}`} onClick={()=>setStart(!start)}></i>}
-          { <i className={`fa-solid w-10 fa-stop fs-2 m-3 ${start || timer > 0 ? "text-danger cursor-pointer" : "text-secondary"}`} onClick={()=>{if(timer > 0)handleStop()}}></i>}
+        <div className="col-2 d-flex justify-content-between">
+          { <i className={`fa-solid w-10 fs-2 m-3 cursor-pointer ${isRunning ? "fa-pause fa-bounce text-primary" : !isRunning && timer > 0 ? "fa-play fa-fade text-primary" : "fa-play text-primary"}`} onClick={()=>setIsRunning(!isRunning)}></i>}
+          {/* { <i className={`fa-solid w-10 fs-2 m-3 cursor-pointer ${start ? "fa-pause fa-bounce text-success" : "fa-play fa-fade text-primary"}`} onClick={()=>setIsRunning(!start)}></i>} */}
+          { <i className={`fa-solid w-10 fa-stop fs-2 m-3 ${isRunning || timer > 0 || countdown ? "text-primary cursor-pointer" : "text-secondary"}`} onClick={()=>{reset()}}></i>}
         </div>
       </div>
 
@@ -53,10 +61,10 @@ const Home = () => {
       <hr></hr>
       <div className="row my-3">
         <div className="cor-6 d-flex justify-content-center">
-          <input type="radio" className="btn-check" onClick={()=>{setCountdown(false)}} name="options-outlined" id="info-outlined" autocomplete="off" disabled={start} checked={!countdown}/>
+          <input type="radio" className="btn-check" onClick={()=>{setCountdown(false)}} name="options-outlined" id="info-outlined"  autoComplete="off" disabled={isRunning} checked={!countdown}/>
           <label className="btn btn-outline-info m-3" htmlFor="info-outlined">Timer</label>
 
-          <input type="radio" className="btn-check" onClick={()=>{setCountdown(true)}} name="options-outlined" id="warning-outlined" autocomplete="off" disabled={start} checked={countdown} />
+          <input type="radio" className="btn-check" onClick={()=>{setCountdown(true)}} name="options-outlined" id="warning-outlined" autoComplete="off" disabled={isRunning} checked={countdown} />
           <label className="btn btn-outline-warning m-3" htmlFor="warning-outlined">Countdown</label>
         </div>
       </div>
@@ -66,12 +74,20 @@ const Home = () => {
             type="number"
             className="form-control text-center"
             id="numberToStartCounter"
-            placeholder="Enter a number to set Timer|Countdown start and press [Enter] key..."
-            value={startCounterValue}
-            disabled={start}
-            onChange={(e) => { setStartCounterValue(e.target.value) }}
-            onKeyUp={(e) => { if(e.key === "Enter") {setTimer(Number(startCounterValue))} }}
+            placeholder="Enter a number for counting start and press [Enter] key..."
+            value={startTimerValue}
+            disabled={isRunning}
+            onChange={(e) => { setStartTimerValue(e.target.value) }}
+            onKeyUp={(e) => { if(e.key === "Enter") {setTimer(Number(startTimerValue))} }}
           />
+        </div>
+      </div>
+      <div className={`row my-3 ${reachedZero? "" : "invisible"}`}>
+        <div className="col-6">
+        <div className="alert alert-primary d-flex align-items-center" role="alert">
+        <i className="bi bi-info-lg flex-shrink-0 me-2"></i>
+        <div>0 time has been reached! Press stop button to reset timer.</div>
+        </div>
         </div>
       </div>
     </div>
