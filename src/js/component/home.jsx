@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Digit } from "./digit";
 import { Counter } from "./counter";
 
-//create your first component
 const Home = () => {
   const [timer, setTimer] = useState(0);
   const [countdown, setCountdown] = useState(false);
-  const [start, setStart] = useState(false);
+  const [start, setStart] = useState(true);
+  const [startCounterValue, setStartCounterValue] = useState('');
 
+  // refresh counter
   useEffect(() => {
     if (start) {
-      if (countdown && timer === 0) setCountdown(false);
+      if (countdown && timer === 0){
+        handleStop();
+      }
 
       const intervalFunc = () => {
         if (!countdown) {
@@ -26,13 +28,10 @@ const Home = () => {
     }
   });
 
-  const handleInitialCounter = (startCounterValue) => {
-    setTimer(startCounterValue);
-  };
-
   const handleStop = () => {
     setStart(false);
     setTimer(0);
+    setStartCounterValue('');
   }
 
   return (
@@ -41,7 +40,7 @@ const Home = () => {
         <Counter time={timer} modeCountdown={countdown} numberOfDigits={6} />
       </div>
 
-      {/* PLAY - RESUME - STOP */}
+      {/* PLAY/RESUME - STOP */}
       <hr></hr>
       <div className="row my-2 justify-content-center">
         <div className="col-6 d-flex justify-content-center">
@@ -63,19 +62,15 @@ const Home = () => {
       </div>
       <div className="row my-3">
         <div className="col-6 d-flex flex-column mx-auto align-items-center">
-          <label htmlFor="numberToStartCounter" className="form-label">
-            Enter a Number to start Timer/Countdown:
-          </label>
-
           <input
             type="number"
-            className="form-control"
+            className="form-control text-center"
             id="numberToStartCounter"
-            onKeyUp={(e) => {
-              if (e.key === "Enter") {
-                handleInitialCounter(Number(e.target.value));
-              }
-            }}
+            placeholder="Enter a number to set Timer|Countdown start and press [Enter] key..."
+            value={startCounterValue}
+            disabled={start}
+            onChange={(e) => { setStartCounterValue(e.target.value) }}
+            onKeyUp={(e) => { if(e.key === "Enter") {setTimer(Number(startCounterValue))} }}
           />
         </div>
       </div>
