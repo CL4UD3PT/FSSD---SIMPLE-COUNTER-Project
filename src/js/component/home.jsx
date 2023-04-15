@@ -11,8 +11,6 @@ const Home = () => {
 
   // refresh counter
   useEffect(() => {
-    if(countdown && reachedZero)console.log('condição 2')
-
     if (isRunning) {
       // when countdown reaches 0
       if (countdown && timer === 0){
@@ -47,7 +45,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="row text-center d-flex bg-black bg-gradient py-3 px-4 rounded-2 mt-3">
-        <Counter time={timer} modeCountdown={countdown} numberOfDigits={6} />
+        <Counter time={timer} modeCountdown={countdown} numberOfDigits={6} countdownFinished={reachedZero} />
       </div>
 
       {/* PLAY/RESUME - STOP */}
@@ -65,10 +63,10 @@ const Home = () => {
       <hr></hr>
       <div className="row my-3">
         <div className="cor-6 d-flex justify-content-center">
-          <input type="radio" className="btn-check" onClick={()=>{setCountdown(false)}} name="options-outlined" id="info-outlined"  autoComplete="off" disabled={isRunning} checked={!countdown}/>
+          <input type="radio" className="btn-check" onClick={()=>{setCountdown(false)}} name="options-outlined" id="info-outlined"  autoComplete="off" disabled={isRunning || reachedZero} checked={!countdown}/>
           <label className="btn btn-outline-info m-3" htmlFor="info-outlined">Timer</label>
 
-          <input type="radio" className="btn-check" onClick={()=>{setCountdown(true)}} name="options-outlined" id="warning-outlined" autoComplete="off" disabled={isRunning} checked={countdown} />
+          <input type="radio" className="btn-check" onClick={()=>{setCountdown(true)}} name="options-outlined" id="warning-outlined" autoComplete="off" disabled={isRunning || reachedZero || timer === 0} checked={countdown} />
           <label className="btn btn-outline-warning m-3" htmlFor="warning-outlined">Countdown</label>
         </div>
       </div>
@@ -87,12 +85,10 @@ const Home = () => {
               onKeyUp={(e) => { if(e.key === "Enter") {setTimer(Number(startTimerValue))} }}
             />
             :
-            <div className="col-6">
-              <div className="alert alert-primary d-flex align-items-center" role="alert">
+              <div className="alert alert-warning d-flex align-items-center" role="alert">
                 <i className="bi bi-info-lg flex-shrink-0 me-2"></i>
-                <div>0 time has been reached! Press stop button to reset timer.</div>
+                <div>Timer has reached the bottom! Press stop button to reset it.</div>
               </div>
-            </div>
           }
         </div>
       </div>
