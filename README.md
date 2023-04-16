@@ -27,9 +27,17 @@ Create a seconds-counter component, called ***SecondsCounter***.
 - Create an alert when the user reaches a specified time, if the user enters "10", an alert should render notifying the user that their time was reached
 
 
-# 🎨👨‍💻 Features added
+# 🎨 Features added
 - Countdown mode with visual alarm when zero is reached
-- Some fancy icon animations (thanks to fontawsome icons built in animation classes)
+- Some fancy icon animations (thanks to fontawesome icons built in animation classes)
+
+
+# 👨‍💻 Technologies
+- HTML
+- CSS
+- React
+- Bootstrap
+- Fontawesome
 
 
 # 👥 Contributors
