@@ -87,7 +87,7 @@ const Home = () => {
             :
               <div className="alert alert-warning d-flex align-items-center" role="alert">
                 <i className="bi bi-info-lg flex-shrink-0 me-2"></i>
-                <div>Timer has reached the bottom! Press stop button to reset it.</div>
+                <div className="text-center">Timer has reached the bottom!<br></br>Press stop button to reset it.</div>
               </div>
           }
         </div>
